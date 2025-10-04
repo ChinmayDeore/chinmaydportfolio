@@ -17,42 +17,65 @@
     /* Hide images that fail to load */
     img[data-hide-on-error] { visibility: visible; }
     img[data-hide-on-error].hidden-on-error { visibility: hidden; height: 0; }
-
     /* Mobile-safe cursor: show glow only on precise pointers */
     @media (pointer:fine) {
       body { cursor: none; }
-      .cursor-glow { display: block; }
+      .cursor-glow { display: block; position: fixed; width: 24px; height: 24px; border-radius: 9999px; pointer-events:none; box-shadow: 0 0 60px 20px rgba(255,0,0,.15); transform: translate(-50%,-50%); z-index: 50; }
     }
     @media (pointer:coarse) {
       .cursor-glow { display: none; }
     }
-
-    /* Optional utility to hide scrollbars if using overflow containers */
+    /* Optional: hide scrollbars for any overflow containers (not required) */
     .no-scrollbar::-webkit-scrollbar{ display:none; }
     .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
   </style>
 </head>
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-indigo-200/50 dark:bg-zinc-950 dark:text-zinc-100">
-  <!-- Sticky Nav -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-zinc-900/70 border-b border-zinc-200 dark:border-zinc-800">
-    <nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-3 justify-between py-3">
-      <a href="#top" class="text-xl sm:text-2xl font-bold tracking-tight">Chinmay Deore</a>
 
-      <!-- Section links (hidden on small screens as before) -->
-      <div class="hidden sm:flex gap-6 text-sm">
-        <a href="#skills" class="hover:text-red-600">Skills</a>
-        <a href="#experience" class="hover:text-red-600">Experience</a>
-        <a href="#projects" class="hover:text-red-600">Projects</a>
-        <a href="#certs" class="hover:text-red-600">Certs</a>
-        <a href="#education" class="hover:text-red-600">Education</a>
+  <!-- Sticky Header with Mobile Menu -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-zinc-900/70 border-b border-zinc-200 dark:border-zinc-800">
+    <nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3">
+      <!-- Top row -->
+      <div class="flex items-center justify-between gap-3">
+        <a href="#top" class="text-xl sm:text-2xl font-bold tracking-tight">Chinmay Deore</a>
+
+        <!-- Desktop section links -->
+        <div class="hidden sm:flex gap-6 text-sm">
+          <a href="#skills" class="hover:text-red-600">Skills</a>
+          <a href="#experience" class="hover:text-red-600">Experience</a>
+          <a href="#projects" class="hover:text-red-600">Projects</a>
+          <a href="#certs" class="hover:text-red-600">Certs</a>
+          <a href="#education" class="hover:text-red-600">Education</a>
+        </div>
+
+        <!-- Mobile toggle -->
+        <button id="navToggle"
+                class="sm:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-zinc-300/60 dark:border-zinc-700/60 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" type="button">
+          <!-- hamburger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
       </div>
 
-      <!-- Contact pills: wrap on mobile so nothing overflows -->
-      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end w-full sm:w-auto">
+      <!-- Contact chips (wrap on mobile) -->
+      <div class="mt-3 flex items-center gap-2 sm:gap-3 flex-wrap justify-start sm:justify-end">
         <a href="https://github.com/ChinmayDeore" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">GitHub</a>
         <a href="https://www.linkedin.com/in/chinmay-deore-547531297/" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">LinkedIn</a>
         <a href="mailto:chinmaydb@outlook.com" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">chinmaydb@outlook.com</a>
         <a href="tel:+17346129351" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">+1 (734) 612-9351</a>
+      </div>
+
+      <!-- Mobile dropdown: same section links -->
+      <div id="mobileMenu" class="sm:hidden hidden mt-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+        <div class="grid gap-2 text-base">
+          <a href="#skills" class="py-1.5 hover:text-red-600">Skills</a>
+          <a href="#experience" class="py-1.5 hover:text-red-600">Experience</a>
+          <a href="#projects" class="py-1.5 hover:text-red-600">Projects</a>
+          <a href="#certs" class="py-1.5 hover:text-red-600">Certs</a>
+          <a href="#education" class="py-1.5 hover:text-red-600">Education</a>
+        </div>
       </div>
     </nav>
   </header>
@@ -79,10 +102,8 @@
             <!-- External-link icon -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2">
-              <!-- square/page -->
               <path stroke-linecap="round" stroke-linejoin="round"
                     d="M5 8a3 3 0 013-3h5m3 3v10a3 3 0 01-3 3H8a3 3 0 01-3-3V11" />
-              <!-- arrow to top-right -->
               <path stroke-linecap="round" stroke-linejoin="round"
                     d="M13 5h6m0 0v6m0-6L10 14" />
             </svg>
@@ -93,7 +114,7 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="py-8">
+    <section id="skills" class="py-8 scroll-mt-24">
       <h2 class="text-2xl font-bold">Skills</h2>
       <!-- Masonry columns: stack on mobile, 2 columns on md+ -->
       <div class="mt-4 columns-1 md:columns-2 gap-4">
@@ -228,7 +249,7 @@
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-8">
+    <section id="experience" class="py-8 scroll-mt-24">
       <h2 class="text-2xl font-bold">Experience</h2>
 
       <!-- Center for Urban Studies -->
@@ -382,7 +403,7 @@ Conducted <b>SEED 2.0 workshops</b> on <b>CVEs</b>/<b>CWEs</b>: <b>Dirty COW</b>
       </article>
     </section>
 
-    <section id="projects" class="py-8">
+    <section id="projects" class="py-8 scroll-mt-24">
       <div class="flex items-baseline justify-between">
         <h2 class="text-2xl font-bold">Projects</h2>
       </div>
@@ -401,7 +422,7 @@ Conducted <b>SEED 2.0 workshops</b> on <b>CVEs</b>/<b>CWEs</b>: <b>Dirty COW</b>
             <div class="mt-3 text-sm leading-relaxed whitespace-pre-line text-zinc-700 dark:text-zinc-300">
 Led a 4-person Agile team in a <b>Waterfall–Scrum Hybrid</b> mobile <b>SDLC</b>, defining <b>MVP</b>, delivery cadence, and <b>DoD/DoR</b>. Laid the groundwork for production scalability while demonstrating multi-disciplinary technical expertise.
 
-Gathered acceptance criteria for automated <b>Selenium</b> test suites covering <b>unit</b>, <b>functional/non-functional</b>, <b>integration</b>, <b>system-level</b>, and <b>UAT</b> checks wired to <b>CI</b> gates for critical-path regressions.
+Gathered acceptance criteria for automated <b>Selenium</b> test suites covering <b>unit</b>, <b>functional/non-functional</b>, <b>integration</b>, <b>system-level</b>, and <b>User Acceptance Testing (UAT)</b> checks wired to <b>CI</b> gates for critical-path regressions.
 
 Engineered an <b>N-tier layered architecture</b> with all backend functionality in a <b>Flask (Python)</b> monolith exposing <b>RESTful</b> endpoints over <b>HTTPS (TLS 1.2+)</b>, featuring <b>Alembic</b> migration workflow and fault-tolerant JSON error/exception handling with fallback logic when third-party data was unavailable, ensuring service continuity under load. Conducted API validation via <b>Postman</b> to maintain correct interface behavior.
 
@@ -463,7 +484,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
     </article>
 
     <!-- Certifications -->
-    <section id="certs" class="py-8">
+    <section id="certs" class="py-8 scroll-mt-24">
       <h2 class="text-2xl font-bold">Certifications</h2>
       <ul class="font-bold mt-3 list-disc pl-5 space-y-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         <li>Google Cybersecurity Certificate </li>
@@ -476,7 +497,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
     </section>
 
     <!-- Education -->
-    <section id="education" class="py-8">
+    <section id="education" class="py-8 scroll-mt-24">
       <h2 class="text-2xl font-bold">Education</h2>
       <div class="mt-4 grid gap-4">
         <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
@@ -491,7 +512,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
     </section>
 
     <!-- Coursework -->
-    <section id="coursework" class="py-8">
+    <section id="coursework" class="py-8 scroll-mt-24">
       <h2 class="text-2xl font-bold">Relevant Coursework</h2>
       <!-- Masonry columns: 1 col on mobile, 2 cols on md+ -->
       <div class="mt-4 columns-1 md:columns-2 gap-4">
@@ -587,7 +608,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
   </div>
 
   <script>
-    // --- Auto year for footer ---
+    // --- Auto year for footer (if a footer year span exists) ---
     document.addEventListener('DOMContentLoaded', () => {
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -600,7 +621,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
       const lbClose = document.getElementById('lightboxClose');
       const lbPrev  = document.getElementById('lightboxPrev');
       const lbNext  = document.getElementById('lightboxNext');
-      if (!lb || !lbImg) return; // if lightbox isn't on the page, bail safely
+      if (!lb || !lbImg) return;
       const thumbs = Array.from(document.querySelectorAll('img[data-gallery="magma"]'));
       let cur = 0;
       function show(i) {
@@ -615,7 +636,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
       lbClose?.addEventListener('click', () => lb.classList.add('hidden'));
       lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.add('hidden'); });
 
-      // --- Keyboard nav ---
+      // Keyboard nav
       window.addEventListener('keydown', (e) => {
         if (lb.classList.contains('hidden')) return;
         if (e.key === 'ArrowLeft')  show(cur - 1);
@@ -623,7 +644,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
         if (e.key === 'Escape')     lb.classList.add('hidden');
       });
 
-      // --- Swipe support ---
+      // Swipe support
       let sx = 0, sy = 0, st = 0;
       const SWIPE_THRESHOLD = 40, VERTICAL_TOLERANCE = 60, TIME_MAX = 600;
       lb.style.touchAction = 'none';
@@ -653,6 +674,23 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
         img.addEventListener('error', () => img.classList.add('hidden-on-error'));
       });
     })();
+
+    // --- Mobile menu toggle ---
+    (function () {
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        const open = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      // Close after navigating
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }));
+    })();
   </script>
 
   <div class="cursor-glow"></div>
@@ -665,7 +703,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
     });
   </script>
 
-  <!-- Footer -->
+  <!-- Footer (kept minimal; content unchanged if not present originally) -->
   <footer class="mt-12 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800">
     © <span id="year"></span> Chinmay Deore. All Rights Reserved.
   </footer>
