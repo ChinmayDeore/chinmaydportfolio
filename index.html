@@ -17,13 +17,28 @@
     /* Hide images that fail to load */
     img[data-hide-on-error] { visibility: visible; }
     img[data-hide-on-error].hidden-on-error { visibility: hidden; height: 0; }
+
+    /* Mobile-safe cursor: show glow only on precise pointers */
+    @media (pointer:fine) {
+      body { cursor: none; }
+      .cursor-glow { display: block; }
+    }
+    @media (pointer:coarse) {
+      .cursor-glow { display: none; }
+    }
+
+    /* Optional utility to hide scrollbars if using overflow containers */
+    .no-scrollbar::-webkit-scrollbar{ display:none; }
+    .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
   </style>
 </head>
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-indigo-200/50 dark:bg-zinc-950 dark:text-zinc-100">
   <!-- Sticky Nav -->
   <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-zinc-900/70 border-b border-zinc-200 dark:border-zinc-800">
-    <nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
-      <a href="#top" class="text-2xl font-bold tracking-tight">Chinmay Deore</a>
+    <nav class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-3 justify-between py-3">
+      <a href="#top" class="text-xl sm:text-2xl font-bold tracking-tight">Chinmay Deore</a>
+
+      <!-- Section links (hidden on small screens as before) -->
       <div class="hidden sm:flex gap-6 text-sm">
         <a href="#skills" class="hover:text-red-600">Skills</a>
         <a href="#experience" class="hover:text-red-600">Experience</a>
@@ -31,198 +46,194 @@
         <a href="#certs" class="hover:text-red-600">Certs</a>
         <a href="#education" class="hover:text-red-600">Education</a>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/ChinmayDeore" target="_blank" class="text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">GitHub</a>
-        <a href="https://www.linkedin.com/in/chinmay-deore-547531297/" target="_blank" class="text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">LinkedIn</a>
-        <a href="mailto:chinmaydb@outlook.com" target="_blank" class="text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">chinmaydb@outlook.com</a>
-        <a href="tel:+17346129351" target="_blank" class="text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">+1 (734) 612-9351</a>
-  
+
+      <!-- Contact pills: wrap on mobile so nothing overflows -->
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end w-full sm:w-auto">
+        <a href="https://github.com/ChinmayDeore" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">GitHub</a>
+        <a href="https://www.linkedin.com/in/chinmay-deore-547531297/" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">LinkedIn</a>
+        <a href="mailto:chinmaydb@outlook.com" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">chinmaydb@outlook.com</a>
+        <a href="tel:+17346129351" target="_blank" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-indigo-500">+1 (734) 612-9351</a>
       </div>
     </nav>
   </header>
 
   <!-- Hero -->
   <main id="top" class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <section class="py-10 sm:py-16 grid grid-cols-1 md:grid-cols-[auto,1fr] gap-8 items-center">
-      <div class="rounded-full h-64 w-64 object-cover shadow-lg mx-auto">
-        <img src="images/selfie.jpg" alt="Chinmay Deore" class="w-full h-full object-cover rounded-2xl shadow-soft ring-1 ring-zinc-200 dark:ring-zinc-800" data-hide-on-error>
+    <section class="py-8 sm:py-16 grid grid-cols-1 md:grid-cols-[auto,1fr] gap-8 items-center">
+      <div class="mx-auto">
+        <img src="images/selfie.jpg" alt="Chinmay Deore" class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover rounded-2xl shadow-soft ring-1 ring-zinc-200 dark:ring-zinc-800" data-hide-on-error>
       </div>
       <div>
-        <p class="mt-2 text-lg text-zinc-700 dark:text-zinc-300">With over 4 years of experience through my academic journey spanning my IT/IS role, software production, and <b> CCDC </b> participation, I've honed practical skills across security, concurrently supporting 100+ users, and systems to stabilize infrastructure. Encompassing <b> AD/GP/DHCP/DNS, VPN, MFP </b> fleets, imaging, <b>Splunk + Sysmon</b> log hunting, <b>PaloAlto/pfSense</b> rule tuning, <b>Wireshark</b> PCAP triage, implementing <b>OAuth2/JWT, ELK</b> with <b>WAF</b>/rate limits. With emphasis on adaptability, I'm highly dedicated to find and apply material essential for keeping services running in today's fast growing industry and rapidly evolving digital landscape. </p>
-   <br><br>
-<p>In my free time I love to surround myself with disciplines like understanding decentralized platforms, engaging in forums regarding vulnerability and technological discoveries, performing open chain analysis through volatility dashboards, sound engineering, and crafting browser extensions, obsidian plugins, and automotive tools with agents to combat redundant tasks for whoever that mentions it. I believe everyday is an opportunity for refining my abilities by nourishing the inner-self and reaching out with help whenever possible. All just a couple steps upwards for making greater sense of our great world. </p>
+        <p class="mt-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300">With over 4 years of experience through my academic journey spanning my IT/IS role, software production, and <b> CCDC </b> participation, I've honed practical skills across security, concurrently supporting 100+ users, and systems to stabilize infrastructure. Encompassing <b> AD/GP/DHCP/DNS, VPN, MFP </b> fleets, imaging, <b>Splunk + Sysmon</b> log hunting, <b>PaloAlto/pfSense</b> rule tuning, <b>Wireshark</b> PCAP triage, implementing <b>OAuth2/JWT, ELK</b> with <b>WAF</b>/rate limits. With emphasis on adaptability, I'm highly dedicated to find and apply material essential for keeping services running in today's fast growing industry and rapidly evolving digital landscape. </p>
+        <br><br>
+        <p>In my free time I love to surround myself with disciplines like understanding decentralized platforms, engaging in forums regarding vulnerability and technological discoveries, performing open chain analysis through volatility dashboards, sound engineering, and crafting browser extensions, obsidian plugins, and automotive tools with agents to combat redundant tasks for whoever that mentions it. I believe everyday is an opportunity for refining my abilities by nourishing the inner-self and reaching out with help whenever possible. All just a couple steps upwards for making greater sense of our great world. </p>
 
-<p class="mt-2 text-lg text-zinc-700 dark:text-zinc-300">I profoundly appreciate you checking out this page, please feel free to reach out to me through any of my contact information above, I'll be anticipating all! </p>
+        <p class="mt-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300">I profoundly appreciate you checking out this page, please feel free to reach out to me through any of my contact information above, I'll be anticipating all! </p>
 
+        <div class="mt-6">
+          <a href="resume/Chinmay_Deore_Resume.pdf"
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-3 px-6 py-3 rounded-full text-lg font-semibold
+                    bg-red-600 hover:bg-red-500 text-white shadow-md transition"
+             aria-label="Open resume in a new tab">
+            <!-- External-link icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                 class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2">
+              <!-- square/page -->
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M5 8a3 3 0 013-3h5m3 3v10a3 3 0 01-3 3H8a3 3 0 01-3-3V11" />
+              <!-- arrow to top-right -->
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M13 5h6m0 0v6m0-6L10 14" />
+            </svg>
+            <span>Resume</span>
+          </a>
+        </div>
       </div>
-<div class="mt-6">
-  <a href="resume/Chinmay_Deore_Resume.pdf"
-     target="_blank" rel="noopener"
-     class="inline-flex items-center gap-3 px-6 py-3 rounded-full text-lg font-semibold
-            bg-red-600 hover:bg-red-500 text-white shadow-md transition"
-     aria-label="Open resume in a new tab">
-    <!-- External-link icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-         class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2">
-      <!-- square/page -->
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M5 8a3 3 0 013-3h5m3 3v10a3 3 0 01-3 3H8a3 3 0 01-3-3V11" />
-      <!-- arrow to top-right -->
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M13 5h6m0 0v6m0-6L10 14" />
-    </svg>
-    <span>Resume</span>
-  </a>
-</div>
     </section>
 
+    <!-- Skills -->
+    <section id="skills" class="py-8">
+      <h2 class="text-2xl font-bold">Skills</h2>
+      <!-- Masonry columns: stack on mobile, 2 columns on md+ -->
+      <div class="mt-4 columns-1 md:columns-2 gap-4">
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Programming</b></summary>
+          <p class="mt-2 text-sm"><b>Languages:</b> Python, Dart, C#, C, C++, Java, JavaScript, TypeScript, Golang, PHP, Rust, R, VBA, SQL, JSON, XML</p>
+          <p class="mt-2 text-sm"><b>Scripting:</b> Bash, PowerShell, Batch, zsh, CMD</p>
+        </details>
 
-<!-- Skills -->
-<section id="skills" class="py-8">
-  <h2 class="text-2xl font-bold">Skills</h2>
-  <!-- Masonry columns: stack on mobile, 2 columns on md+ -->
-  <div class="mt-4 columns-1 md:columns-2 gap-4">
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Frameworks & Runtimes</b></summary>
+          <p class="mt-2 text-sm"><b>Backend:</b> Flask, Django, Node.js, Express, Ruby on Rails, .NET, OAuth, Alembic, Paramiko, ASP.NET, IIS, nginx, Apache Tomcat, AJAX</p>
+          <p class="mt-2 text-sm"><b>Frontend:</b> React.js, Flutter/Dart, Angular, Tailwind CSS</p>
+          <p class="mt-2 text-sm"><b>Hybrid:</b> Next.js</p>
+          <p class="mt-2 text-sm"><b>Testing:</b> Selenium, Postman</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Programming</b></summary>
-      <p class="mt-2 text-sm"><b>Languages:</b> Python, Dart, C#, C, C++, Java, JavaScript, TypeScript, Golang, PHP, Rust, R, VBA, SQL, JSON, XML</p>
-      <p class="mt-2 text-sm"><b>Scripting:</b> Bash, PowerShell, Batch, zsh, CMD</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Development Tools</b></summary>
+          <p class="mt-2 text-sm"><b>Text Editors/IDEs:</b> Visual Studio Code, Visual Studio 2022, IntelliJ, Eclipse, IDLE, Vim, Nano, Emacs, Notepad++</p>
+          <p class="mt-2 text-sm"><b>Terminals:</b> PuTTY, MobaXterm, mRemoteNG</p>
+          <p class="mt-2 text-sm"><b>Emulation Compatibility:</b> WineHQ, Dolphin, PCSX2, Xcode Simulator, Android Studio</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Frameworks & Runtimes</b></summary>
-      <p class="mt-2 text-sm"><b>Backend:</b> Flask, Django, Node.js, Express, Ruby on Rails, .NET, OAuth, Alembic, Paramiko, ASP.NET, IIS, nginx, Apache Tomcat, AJAX</p>
-      <p class="mt-2 text-sm"><b>Frontend:</b> React.js, Flutter/Dart, Angular, Tailwind CSS</p>
-      <p class="mt-2 text-sm"><b>Hybrid:</b> Next.js</p>
-      <p class="mt-2 text-sm"><b>Testing:</b> Selenium, Postman</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Data Management</b></summary>
+          <p class="mt-2 text-sm"><b>Relational:</b> PostgreSQL, MySQL, SQLite, Oracle, Microsoft Access/SSMS</p>
+          <p class="mt-2 text-sm"><b>NoSQL:</b> MongoDB, DynamoDB</p>
+          <p class="mt-2 text-sm"><b>Caching:</b> Redis</p>
+          <p class="mt-2 text-sm"><b>Storage & Filesystems:</b> SAN, NAS, ext4, VMFS, NTFS</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Development Tools</b></summary>
-      <p class="mt-2 text-sm"><b>Text Editors/IDEs:</b> Visual Studio Code, Visual Studio 2022, IntelliJ, Eclipse, IDLE, Vim, Nano, Emacs, Notepad++</p>
-      <p class="mt-2 text-sm"><b>Terminals:</b> PuTTY, MobaXterm, mRemoteNG</p>
-      <p class="mt-2 text-sm"><b>Emulation Compatibility:</b> WineHQ, Dolphin, PCSX2, Xcode Simulator, Android Studio</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Version Control & CI/CD</b></summary>
+          <p class="mt-2 text-sm">Git, GitHub, GitLab, Jenkins</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Data Management</b></summary>
-      <p class="mt-2 text-sm"><b>Relational:</b> PostgreSQL, MySQL, SQLite, Oracle, Microsoft Access/SSMS</p>
-      <p class="mt-2 text-sm"><b>NoSQL:</b> MongoDB, DynamoDB</p>
-      <p class="mt-2 text-sm"><b>Caching:</b> Redis</p>
-      <p class="mt-2 text-sm"><b>Storage & Filesystems:</b> SAN, NAS, ext4, VMFS, NTFS</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Networking</b></summary>
+          <p class="mt-2 text-sm"><b>Firewall:</b> Palo Alto NGFW (PAN), pfSense, ufw, iptables</p>
+          <p class="mt-2 text-sm"><b>Access:</b> OpenVPN, GlobalProtect, Citrix</p>
+          <p class="mt-2 text-sm"><b>MTA:</b> Postfix</p>
+          <p class="mt-2 text-sm"><b>MDA:</b> Dovecot</p>
+          <p class="mt-2 text-sm"><b>MUA:</b> Thunderbird, Outlook</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Version Control & CI/CD</b></summary>
-      <p class="mt-2 text-sm">Git, GitHub, GitLab, Jenkins</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Security Operations</b></summary>
+          <p class="mt-2 text-sm"><b>SIEM:</b> Splunk, Google Chronicle</p>
+          <p class="mt-2 text-sm"><b>IDS/IPS:</b> Snort, Suricata, fail2ban</p>
+          <p class="mt-2 text-sm"><b>EPP/EDR/XMR:</b> Clam AntiVirus, Malwarebytes, Microsoft Defender/Security Suite, CrowdStrike Falcon</p>
+          <p class="mt-2 text-sm"><b>Automation:</b> Ansible, Autoruns</p>
+          <p class="mt-2 text-sm"><b>Cryptography:</b> VeraCrypt, BitLocker, bcrypt</p>
+          <p class="mt-2 text-sm"><b>Penetration:</b> Metasploit, Hashcat, John the Ripper, Nessus, OpenVAS</p>
+          <p class="mt-2 text-sm"><b>Network Forensics:</b> Wireshark, tcpdump, netcat, OpenTelemetry (OTLP)</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Networking</b></summary>
-      <p class="mt-2 text-sm"><b>Firewall:</b> Palo Alto NGFW (PAN), pfSense, ufw, iptables</p>
-      <p class="mt-2 text-sm"><b>Access:</b> OpenVPN, GlobalProtect, Citrix</p>
-      <p class="mt-2 text-sm"><b>MTA:</b> Postfix</p>
-      <p class="mt-2 text-sm"><b>MDA:</b> Dovecot</p>
-      <p class="mt-2 text-sm"><b>MUA:</b> Thunderbird, Outlook</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Cloud & Hosting</b></summary>
+          <p class="mt-2 text-sm"><b>IaaS:</b> Azure, Rackspace, Webhost, Google GCE/GCS, AWS EC2/S3</p>
+          <p class="mt-2 text-sm"><b>PaaS:</b> Heroku, Vercel, AWS Lambda</p>
+          <p class="mt-2 text-sm"><b>SaaS:</b> Entra ID, o365, Intune MDM/MAM, Adobe CreativeCloud</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Security Operations</b></summary>
-      <p class="mt-2 text-sm"><b>SIEM:</b> Splunk, Google Chronicle</p>
-      <p class="mt-2 text-sm"><b>IDS/IPS:</b> Snort, Suricata, fail2ban</p>
-      <p class="mt-2 text-sm"><b>EPP/EDR/XMR:</b> Clam AntiVirus, Malwarebytes, Microsoft Defender/Security Suite, CrowdStrike Falcon</p>
-      <p class="mt-2 text-sm"><b>Automation:</b> Ansible, Autoruns</p>
-      <p class="mt-2 text-sm"><b>Cryptography:</b> VeraCrypt, BitLocker, bcrypt</p>
-      <p class="mt-2 text-sm"><b>Penetration:</b> Metasploit, Hashcat, John the Ripper, Nessus, OpenVAS</p>
-      <p class="mt-2 text-sm"><b>Network Forensics:</b> Wireshark, tcpdump, netcat, OpenTelemetry (OTLP)</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Deployment & Management</b></summary>
+          <p class="mt-2 text-sm">Active Directory, WDS, MDT, WAIK/ADK, SCCM, LAPS, Server Manager, AWS IAM</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Cloud & Hosting</b></summary>
-      <p class="mt-2 text-sm"><b>IaaS:</b> Azure, Rackspace, Webhost, Google GCE/GCS, AWS EC2/S3</p>
-      <p class="mt-2 text-sm"><b>PaaS:</b> Heroku, Vercel, AWS Lambda</p>
-      <p class="mt-2 text-sm"><b>SaaS:</b> Entra ID, o365, Intune MDM/MAM, Adobe CreativeCloud</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Virtualization & Orchestration</b></summary>
+          <p class="mt-2 text-sm"><b>Hypervisors/VDI:</b> Proxmox, VMware Horizon, Hyper-V, AWS RDS, VirtualBox</p>
+          <p class="mt-2 text-sm"><b>CPU Extensions:</b> VT-x, AMD-V</p>
+          <p class="mt-2 text-sm"><b>Containerization:</b> Docker, Kubernetes with Falco</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Deployment & Management</b></summary>
-      <p class="mt-2 text-sm">Active Directory, WDS, MDT, WAIK/ADK, SCCM, LAPS, Server Manager, AWS IAM</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Operating Systems</b></summary>
+          <p class="mt-2 text-sm">Unix, Linux, Windows 10/11/Server 2016/2019, macOS, iOS, Android</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Virtualization & Orchestration</b></summary>
-      <p class="mt-2 text-sm"><b>Hypervisors/VDI:</b> Proxmox, VMware Horizon, Hyper-V, AWS RDS, VirtualBox</p>
-      <p class="mt-2 text-sm"><b>CPU Extensions:</b> VT-x, AMD-V</p>
-      <p class="mt-2 text-sm"><b>Containerization:</b> Docker, Kubernetes with Falco</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Analytics</b></summary>
+          <p class="mt-2 text-sm"><b>BI & Reporting:</b> IBM Cognos Analytics, Remark Office OMR, WinCati (Supervisor/Sensus)</p>
+          <p class="mt-2 text-sm"><b>Visualization:</b> Jupyter, Plotly, matplotlib, Mapbox, QGIS</p>
+          <p class="mt-2 text-sm"><b>ML:</b> NumPy, pandas, scikit-learn, TensorFlow, PyTorch, OpenCV, Colab, DeepSeek, Ollama, Agentic MCP servers</p>
+          <p class="mt-2 text-sm"><b>Statistics:</b> Minitab, IBM SPSS</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Operating Systems</b></summary>
-      <p class="mt-2 text-sm">Unix, Linux, Windows 10/11/Server 2016/2019, macOS, iOS, Android</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Collaboration</b></summary>
+          <p class="mt-2 text-sm"><b>Articulation & Briefing:</b> Slack, Atlassian Kanban, SharePoint, Lucidchart, Visio, logic.ly, Whimsical, Obsidian, Notion, Logseq, Adobe Acrobat, LibreOffice, MS Office: Excel/Word/PowerPoint/OneNote</p>
+          <p class="mt-2 text-sm"><b>ITSM:</b> Jira Service Management</p>
+          <p class="mt-2 text-sm"><b>Remote Control:</b> RDC, Quick Assist, Teams, Zoom</p>
+          <p class="mt-2 text-sm"><b>VoIP software:</b> Mitel Clearspan Communicator, Line2</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Analytics</b></summary>
-      <p class="mt-2 text-sm"><b>BI & Reporting:</b> IBM Cognos Analytics, Remark Office OMR, WinCati (Supervisor/Sensus)</p>
-      <p class="mt-2 text-sm"><b>Visualization:</b> Jupyter, Plotly, matplotlib, Mapbox, QGIS</p>
-      <p class="mt-2 text-sm"><b>ML:</b> NumPy, pandas, scikit-learn, TensorFlow, PyTorch, OpenCV, Colab, DeepSeek, Ollama, Agentic MCP servers</p>
-      <p class="mt-2 text-sm"><b>Statistics:</b> Minitab, IBM SPSS</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Site Reliability Engineering</b></summary>
+          <p class="mt-2 text-sm">HA clusters, DRP/BCP, HPC, MTTR/MTBF, RTO/RPO, QoS, KPI/OLA/SLA/SLO/SLI</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Collaboration</b></summary>
-      <p class="mt-2 text-sm"><b>Articulation & Briefing:</b> Slack, Atlassian Kanban, SharePoint, Lucidchart, Visio, logic.ly, Whimsical, Obsidian, Notion, Logseq, Adobe Acrobat, LibreOffice, MS Office: Excel/Word/PowerPoint/OneNote</p>
-      <p class="mt-2 text-sm"><b>ITSM:</b> Jira Service Management</p>
-      <p class="mt-2 text-sm"><b>Remote Control:</b> RDC, Quick Assist, Teams, Zoom</p>
-      <p class="mt-2 text-sm"><b>VoIP software:</b> Mitel Clearspan Communicator, Line2</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Governance & Risk Management</b></summary>
+          <p class="mt-2 text-sm"><b>Standards:</b> PCI-DSS, HIPAA, GDPR, IEC, ISO 27001/27002/27005/27702, FitSM, COBIT, ITIL, NIST 800-53/SP 800-145, CIA triad, SOC 1/2, IAM, PKI, Zero Trust, SOAR, OWASP Top 10, FTC Regulator</p>
+          <p class="mt-2 text-sm"><b>Programs:</b> ISMS, PIMS, ISSP, PDCA</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Site Reliability Engineering</b></summary>
-      <p class="mt-2 text-sm">HA clusters, DRP/BCP, HPC, MTTR/MTBF, RTO/RPO, QoS, KPI/OLA/SLA/SLO/SLI</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Drafting & Design</b></summary>
+          <p class="mt-2 text-sm"><b>CAD/CAM:</b> Siemens NX 12, AutoCAD, Fusion 360</p>
+          <p class="mt-2 text-sm"><b>Slicing:</b> UltiMaker Cura, LulzBot</p>
+          <p class="mt-2 text-sm"><b>Modelling:</b> Unity, Unreal Engine, Blender</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Governance & Risk Management</b></summary>
-      <p class="mt-2 text-sm"><b>Standards:</b> PCI-DSS, HIPAA, GDPR, IEC, ISO 27001/27002/27005/27702, FitSM, COBIT, ITIL, NIST 800-53/SP 800-145, CIA triad, SOC 1/2, IAM, PKI, Zero Trust, SOAR, OWASP Top 10, FTC Regulator</p>
-      <p class="mt-2 text-sm"><b>Programs:</b> ISMS, PIMS, ISSP, PDCA</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Privacy Utilities</b></summary>
+          <p class="mt-2 text-sm">Tor, Monero, Electrum, qBittorrent, Matrix, Sardine, OSINT4all, TMACv6</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Drafting & Design</b></summary>
-      <p class="mt-2 text-sm"><b>CAD/CAM:</b> Siemens NX 12, AutoCAD, Fusion 360</p>
-      <p class="mt-2 text-sm"><b>Slicing:</b> UltiMaker Cura, LulzBot</p>
-      <p class="mt-2 text-sm"><b>Modelling:</b> Unity, Unreal Engine, Blender</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Creativity</b></summary>
+          <p class="mt-2 text-sm"><b>Media:</b> Adobe Photoshop/Premiere, iMovie, MS Paint, OBS Studio</p>
+          <p class="mt-2 text-sm"><b>DAWs:</b> FL Studio, LMMS, GarageBand, inMusic MPC Beats</p>
+        </details>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Privacy Utilities</b></summary>
-      <p class="mt-2 text-sm">Tor, Monero, Electrum, qBittorrent, Matrix, Sardine, OSINT4all, TMACv6</p>
-    </details>
+        <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer"><b>Languages</b></summary>
+          <p class="mt-2 text-sm">English, Hindi, Marathi, Urdu</p>
+        </details>
+      </div>
+    </section>
 
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Creativity</b></summary>
-      <p class="mt-2 text-sm"><b>Media:</b> Adobe Photoshop/Premiere, iMovie, MS Paint, OBS Studio</p>
-      <p class="mt-2 text-sm"><b>DAWs:</b> FL Studio, LMMS, GarageBand, inMusic MPC Beats</p>
-    </details>
-
-    <details class="break-inside-avoid mb-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer"><b>Languages</b></summary>
-      <p class="mt-2 text-sm">English, Hindi, Marathi, Urdu</p>
-    </details>
-
-  </div>
-</section>
-
-
-
-<!-- Experience -->
+    <!-- Experience -->
     <section id="experience" class="py-8">
       <h2 class="text-2xl font-bold">Experience</h2>
 
-    <!-- Center for Urban Studies -->
+      <!-- Center for Urban Studies -->
       <article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
-        <div class="flex items-center justify-between flex-wrap gap-2">
+        <div class="flex items-start justify-between flex-wrap gap-2">
           <div>
             <h3 class="text-xl font-semibold">Center for Urban Studies — IT/IS Technician (Student Assistant)</h3>
             <span class="text-sm text-zinc-500">WSU Detroit, Michigan • July 2024 – April 2025</span>
@@ -276,36 +287,34 @@ Administered <b>Apple IDs</b> and <b>Chacktok Photobooth VIP</b> software at eve
 
             </div>
           </details>
-          </div>
-          <ul class="mt-3 list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-            <li>Tier 1→2 support for 100+ staff via Jira ITSM; Quick Assist, RDP, Teams.</li>
-            <li>AD permissions, PoLP, GPOs, ACLs; OS updates, drivers, LAN/WAN, VPN (GlobalProtect).</li>
-            <li>Printers: static IP/DHCP, jams/spooler, HTTPS access, DigiCert CA trust.</li>
-            <li>Hardware: SFC/DISM, Event Viewer, reseat/replace RAM/PSU/SSD/NVMe/CMOS; imaging, BitLocker, cloning, UEFI boot fixes.</li>
-            <li>CATI lab (12 stations, 60k+ recipients); reduced call failures ~85%; Sensus/ASP.NET components; scheduled exports.</li>
-            <li>VoIP (Mitel, Line2) profile fixes and peripherals troubleshooting.</li>
-            <li>Automated label generation via Remark Office OMR (300+ weekly mail-backs).</li>
-            <li>Asset DB in Access (VBA global vars); FWA/loan-out tracking; physical rollouts.</li>
-            <li>Excel inventory merges & calc fields; SPII handling per HIPAA & NIST 800‑53.</li>
-            <li>MySQL dumps from Rackspace; DDL/DML/JOINS; integrity validation.</li>
-            <li>Registry tunings (IRPStackSize) for SMB share throughput.</li>
-            <li>TPM 2.0 readiness sweep for 200+ endpoints; Win11 transition roadmap.</li>
-            <li>.NET 3.5 Features on Demand for Novabench; Wasp scanning & surplus process; recycled 1000+ lbs; Optiplex fan remounts.</li>
-            <li>Procurement coordination; license reallocations (Office, Adobe); chain‑of‑custody.</li>
-            <li>AV stagings with Meeting Owl 3; hybrid events via Zoom.</li>
-            <li>CMS updates with Django basics; image optimization; Visio floorplans.</li>
-            <li>Security awareness: scam pop‑ups/scareware triage; DNS/hosts cleanup.</li>
-            <li>BI support: IBM SPSS & Cognos; coordinated with vendors; o365 MFA issues.</li>
-            <li>QGIS + OSM geocoding & spatial joins for environmental exposure mapping; ACT program full‑stack Next.js + Mapbox + Google Maps tool.</li>
-            <li>Authored SOPs and onboarding guides; photobooth deployments.</li>
-          </ul>
-        </details>
+        </div>
+        <ul class="mt-3 list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <li>Tier 1→2 support for 100+ staff via Jira ITSM; Quick Assist, RDP, Teams.</li>
+          <li>AD permissions, PoLP, GPOs, ACLs; OS updates, drivers, LAN/WAN, VPN (GlobalProtect).</li>
+          <li>Printers: static IP/DHCP, jams/spooler, HTTPS access, DigiCert CA trust.</li>
+          <li>Hardware: SFC/DISM, Event Viewer, reseat/replace RAM/PSU/SSD/NVMe/CMOS; imaging, BitLocker, cloning, UEFI boot fixes.</li>
+          <li>CATI lab (12 stations, 60k+ recipients); reduced call failures ~85%; Sensus/ASP.NET components; scheduled exports.</li>
+          <li>VoIP (Mitel, Line2) profile fixes and peripherals troubleshooting.</li>
+          <li>Automated label generation via Remark Office OMR (300+ weekly mail-backs).</li>
+          <li>Asset DB in Access (VBA global vars); FWA/loan-out tracking; physical rollouts.</li>
+          <li>Excel inventory merges & calc fields; SPII handling per HIPAA & NIST 800-53.</li>
+          <li>MySQL dumps from Rackspace; DDL/DML/JOINS; integrity validation.</li>
+          <li>Registry tunings (IRPStackSize) for SMB share throughput.</li>
+          <li>TPM 2.0 readiness sweep for 200+ endpoints; Win11 transition roadmap.</li>
+          <li>.NET 3.5 Features on Demand for Novabench; Wasp scanning & surplus process; recycled 1000+ lbs; Optiplex fan remounts.</li>
+          <li>Procurement coordination; license reallocations (Office, Adobe); chain-of-custody.</li>
+          <li>AV stagings with Meeting Owl 3; hybrid events via Zoom.</li>
+          <li>CMS updates with Django basics; image optimization; Visio floorplans.</li>
+          <li>Security awareness: scam pop-ups/scareware triage; DNS/hosts cleanup.</li>
+          <li>BI support: IBM SPSS & Cognos; coordinated with vendors; o365 MFA issues.</li>
+          <li>QGIS + OSM geocoding & spatial joins for environmental exposure mapping; ACT program full-stack Next.js + Mapbox + Google Maps tool.</li>
+          <li>Authored SOPs and onboarding guides; photobooth deployments.</li>
+        </ul>
       </article>
-
 
       <!-- Cyber Defense Club -->
       <article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
-        <div class="flex items-center justify-between flex-wrap gap-2">
+        <div class="flex items-start justify-between flex-wrap gap-2">
           <div>
             <h3 class="text-xl font-semibold">WSU Cyber Defense Club </h3>
             <span class="text-sm text-zinc-500">Detroit, MI • Sep 2021 – May 2025</span>
@@ -335,63 +344,61 @@ Authored “<b>First Hour Doomsday playbooks</b>” as <b>hardening checklists</
 
 Trained year-round on <b>port numbers</b>, <b>OSI layers</b>, and <b>protocols</b> (<b>SSL, TLS, SSH, TCP, UDP, QUIC, HTTP/1.1/2/3, XMPP</b>, IPv4/6 headers). Practiced <b>Paramiko SSHv2</b>, <b>Kernel-mode Stack Protection</b>, and <b>Email stack relay monitoring (Postfix/Dovecot)</b>. Covered <b>system calls, threads, mutexes, semaphores</b>, and <b>scheduling</b>. Implemented <b>SSO</b> to reduce token sprawl.
 
-Conducted <b>SEED 2.0 workshops</b> on <b>CVEs</b>/<b>CWEs</b>: <b>Dirty COW</b>, <b>Spectre/Meltdown</b>, <b>Format String/Heap Overflow</b>, <b>shellshock</b>, <b>DNS Rebinding</b>, <b>CSRF/XSS</b>, <b>ROP</b>, <b>Session Hijacking</b>, <b>Password cracking (John, Hashcat)</b>, <b>Binary exploitation</b>, <b>TCP Reset/SYN Flooding</b>, <b>DNS Cache Poisoning</b>, <b>MITM (ARP spoofing, SSL stripping)</b>, <b>Hash collisions</b>, <b>Padding Oracle</b>, <b>Smart Contract replay</b>, <b>SFTP exploits</b>, <b>URL masking</b>, <b>MAC spoofing (TMACv6)</b>, <b>IMSI catchers</b>, <b>Keylogging</b>, <b>DLL hijacking</b>, and <b>ntds.dit manipulation</b>.
+Conducted <b>SEED 2.0 workshops</b> on <b>CVEs</b>/<b>CWEs</b>: <b>Dirty COW</b>, <b>Spectre/Meltdown</b>, <b>Format String/Heap Overflow</b>, <b>shellshock</b>, <b>DNS Rebinding</b>, <b>CSRF/XSS</b>, <b>ROP</b>, <b>Password cracking (John, Hashcat)</b>, <b>Binary exploitation</b>, <b>TCP Reset/SYN Flooding</b>, <b>DNS Cache Poisoning</b>, <b>MITM (ARP spoofing, SSL stripping)</b>, <b>Hash collisions</b>, <b>Padding Oracle</b>, <b>Smart Contract replay</b>, <b>SFTP exploits</b>, <b>URL masking</b>, <b>MAC spoofing (TMACv6)</b>, <b>IMSI catchers</b>, <b>Keylogging</b>, <b>DLL hijacking</b>, and <b>ntds.dit manipulation</b>.
 
             </div>
           </details>
-          </div>
-          <ul class="mt-3 list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-            <li>CCDC blue team (Nationals/Regional/Midwest); <a href="https://www.instagram.com/p/DHJCUPjA35T" target="_blank" class="text-red-600 hover:underline">2nd place Michigan 2025.</a></li>
-            <li>IR injects, MITRE ATT&CK mapping, AARs; SLA‑timed service restores.</li>
-            <li>Hardened Windows/Unix/containers: GPOs, lockouts, LAPS, disable legacy protocols, Docker rebuilds.</li>
-            <li>Palo Alto NGFW baselines: App‑ID, URL/threat profiles, east‑west segmentation, ACL denies.</li>
-            <li>Uptime for DNS/NTP (Debian), AD/DC/DHCP/Kerberos (Win 2019), HTTP/HTTPS (CentOS), IMAP/POP3/SMTP with PGP.</li>
-            <li>Splunk forwarders (Sysmon/journald/auditd/NGFW); saved searches; pcap triage with tcpdump/Wireshark.</li>
-            <li>Proxmox practice range via OpenVPN + MobaXterm; golden‑image rollbacks.</li>
-            <li>CTFd site for internal/outreach; hackathon prototyping; MTTR playbooks.</li>
-            <li>Funding, recruiting, documentation; CCDN logistics; SEED 2.0 workshops (Dirty COW, Spectre/Meltdown, XSS/CSRF, ROP, DNS cache poisoning, ARP spoofing, etc.).</li>
-          </ul>
-        </details>
+        </div>
+        <ul class="mt-3 list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <li>CCDC blue team (Nationals/Regional/Midwest); <a href="https://www.instagram.com/p/DHJCUPjA35T" target="_blank" class="text-red-600 hover:underline">2nd place Michigan 2025.</a></li>
+          <li>IR injects, MITRE ATT&CK mapping, AARs; SLA-timed service restores.</li>
+          <li>Hardened Windows/Unix/containers: GPOs, lockouts, LAPS, disable legacy protocols, Docker rebuilds.</li>
+          <li>Palo Alto NGFW baselines: App-ID, URL/threat profiles, east-west segmentation, ACL denies.</li>
+          <li>Uptime for DNS/NTP (Debian), AD/DC/DHCP/Kerberos (Win 2019), HTTP/HTTPS (CentOS), IMAP/POP3/SMTP with PGP.</li>
+          <li>Splunk forwarders (Sysmon/journald/auditd/NGFW); saved searches; pcap triage with tcpdump/Wireshark.</li>
+          <li>Proxmox practice range via OpenVPN + MobaXterm; golden-image rollbacks.</li>
+          <li>CTFd site for internal/outreach; hackathon prototyping; MTTR playbooks.</li>
+          <li>Funding, recruiting, documentation; CCDN logistics; SEED 2.0 workshops (Dirty COW, Spectre/Meltdown, XSS/CSRF, ROP, DNS cache poisoning, ARP spoofing, etc.).</li>
+        </ul>
       </article>
 
-<!-- Volunteer -->
-<article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
-  <div class="header-row">
-    <div>
-      <h3 class="text-xl font-semibold">Computer Fix-It — Volunteer</h3>
-      <span class="text-sm text-zinc-500">ATEC Warren, Michigan • October 2023</span>
-    </div>
-  </div>
+      <!-- Volunteer -->
+      <article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
+        <div class="header-row">
+          <div>
+            <h3 class="text-xl font-semibold">Computer Fix-It — Volunteer</h3>
+            <span class="text-sm text-zinc-500">ATEC Warren, Michigan • October 2023</span>
+          </div>
+        </div>
 
-  <ul class="ul-tight one-col list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-    <li>Supported a non-profit event hosted by WSCDC where community members brought computers/devices for free repair at the Advanced Technology Education Center (off-campus in Macomb County).</li>
-    <li>Handled and tracked personally sensitive information (general info, usernames, passwords) via <b>Google Forms</b> with careful chain-of-custody.</li>
-    <li>Re-imaged the operating system on an outdated Surface Pro to the latest Windows release.</li>
-    <li>Assembled an affordable cooling fan solution for a dysfunctional HP PC and verified temps post-install.</li>
-    <li>Optimized memory performance by disabling unnecessary startup/background processes using Sysinternals<b> Autoruns</b> and targeted registry cleanup.</li>
-    <li>Removed adware/trackers, cleared cache and temp files, purged memory dumps, and secured devices with <b>Malwarebytes</b>.</li>
-  </ul>
-</article>
+        <ul class="ul-tight one-col list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <li>Supported a non-profit event hosted by WSCDC where community members brought computers/devices for free repair at the Advanced Technology Education Center (off-campus in Macomb County).</li>
+          <li>Handled and tracked personally sensitive information (general info, usernames, passwords) via <b>Google Forms</b> with careful chain-of-custody.</li>
+          <li>Re-imaged the operating system on an outdated Surface Pro to the latest Windows release.</li>
+          <li>Assembled an affordable cooling fan solution for a dysfunctional HP PC and verified temps post-install.</li>
+          <li>Optimized memory performance by disabling unnecessary startup/background processes using Sysinternals<b> Autoruns</b> and targeted registry cleanup.</li>
+          <li>Removed adware/trackers, cleared cache and temp files, purged memory dumps, and secured devices with <b>Malwarebytes</b>.</li>
+        </ul>
+      </article>
+    </section>
 
+    <section id="projects" class="py-8">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl font-bold">Projects</h2>
+      </div>
 
-
-<section id="projects" class="py-8">
-<div class="flex items-baseline justify-between">
-<h2 class="text-2xl font-bold">Projects</h2>
-</div>
-
-<!-- MAGMA -->
-<article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
-  <div class="flex items-center justify-between flex-wrap gap-2">
-    <div>
-      <h3 class="text-xl font-semibold">MAGMA — Stock Analysis Platform
-        <span class="text-sm font-normal text-zinc-500"> Flask • Flutter • PostgreSQL • NeuralForecast • Render</span>
-      </h3>
-      <span class="text-sm text-zinc-500">December 2024 – May 2025</span>
-    </div>
-    <details class="mt-3 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/50 dark:bg-zinc-900/50">
-      <summary class="cursor-pointer text-sm font-semibold text-red-600">Full Write-Up</summary>
-      <div class="mt-3 text-sm leading-relaxed whitespace-pre-line text-zinc-700 dark:text-zinc-300">
+      <!-- MAGMA -->
+      <article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
+        <div class="flex items-start justify-between flex-wrap gap-2">
+          <div>
+            <h3 class="text-xl font-semibold">MAGMA — Stock Analysis Platform
+              <span class="text-sm font-normal text-zinc-500"> Flask • Flutter • PostgreSQL • NeuralForecast • Render</span>
+            </h3>
+            <span class="text-sm text-zinc-500">December 2024 – May 2025</span>
+          </div>
+          <details class="mt-3 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white/50 dark:bg-zinc-900/50">
+            <summary class="cursor-pointer text-sm font-semibold text-red-600">Full Write-Up</summary>
+            <div class="mt-3 text-sm leading-relaxed whitespace-pre-line text-zinc-700 dark:text-zinc-300">
 Led a 4-person Agile team in a <b>Waterfall–Scrum Hybrid</b> mobile <b>SDLC</b>, defining <b>MVP</b>, delivery cadence, and <b>DoD/DoR</b>. Laid the groundwork for production scalability while demonstrating multi-disciplinary technical expertise.
 
 Gathered acceptance criteria for automated <b>Selenium</b> test suites covering <b>unit</b>, <b>functional/non-functional</b>, <b>integration</b>, <b>system-level</b>, and <b>UAT</b> checks wired to <b>CI</b> gates for critical-path regressions.
@@ -411,76 +418,64 @@ Hardened data handling with <b>SQLAlchemy ORM</b> and <b>parameterized queries</
 Produced diagrams and documentation: <b>ERD</b> with crow’s-foot, <b>DFD</b>, database and architecture diagrams in <b>Whimsical</b>; <b>UML</b> sequence/use-case diagrams in <b>Lucidchart</b>. Practiced Agile rigor with <b>standups</b>, <b>sprint planning/reviews</b>, <b>backlog grooming</b>, demos, and KPI tracking in <b>Jira</b>. Managed branching/PRs in <b>GitHub</b> and merged major features during conflict resolution.
 
 Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeholder reports, <b>Test Plan</b>, <b>User Stories</b>, <b>User Manual</b>, <b>API docs</b>, and a <b>Requirements Traceability Matrix (RTM)</b>.
-      </div>
-    </details>
-    </div>
-  <ul class="ul-tight one-col list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-    <li>Team lead: Waterfall–Scrum hybrid SDLC; MVP scope; DoD/DoR; stakeholder cadence.</li>
-    <li>Back end: Flask monolith; REST over HTTPS; Alembic migrations; Postman-validated contracts.</li>
-    <li>Data/ML: Marketstack ingest; NeuralForecast LSTM (15-min/EOD/weekly); GPT-4-Turbo narratives; warm-cache forecasts.</li>
-    <li>Perf: cache-first path cut third-party calls ~70–90%; repeat queries near-instant; Render + PostgreSQL + L7 LB.</li>
-    <li>Client: Flutter UI with Syncfusion charts; theme sync; async safety patterns (mounted/teardown-safe).</li>
-    <li>Security & compliance: bcrypt + AES-256; OAuth2/JWT; SMTP OTC verification; WAF + ELK; parameterized SQLAlchemy ORM.</li>
-    <li>Process/docs: Jira ceremonies; GitHub PRs; SRS/Design/Test Plan/RTM; ERD/DFD/UML in Whimsical/Lucidchart.</li>
-  </ul>
-  <!-- Compact thumbnail strip -->
-  <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 gap-2 mt-4">
-    <img src="images/m.1.jpg" alt="MAGMA 1" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="0">
-    <img src="images/m.2.jpg" alt="MAGMA 2" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="1">
-    <img src="images/m.3.jpg" alt="MAGMA 3" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="2">
-    <img src="images/m.4.jpg" alt="MAGMA 4" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="3">
-    <img src="images/m.5.jpg" alt="MAGMA 5" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="4">
-    <img src="images/m.6.jpg" alt="MAGMA 6" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="5">
-    <img src="images/m.7.jpg" alt="MAGMA 7" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer col-span-2 sm:col-span-2 md:col-span-1" loading="lazy" data-gallery="magma" data-index="6">
+            </div>
+          </details>
+        </div>
+        <ul class="ul-tight one-col list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <li>Team lead: Waterfall–Scrum hybrid SDLC; MVP scope; DoD/DoR; stakeholder cadence.</li>
+          <li>Back end: Flask monolith; REST over HTTPS; Alembic migrations; Postman-validated contracts.</li>
+          <li>Data/ML: Marketstack ingest; NeuralForecast LSTM (15-min/EOD/weekly); GPT-4-Turbo narratives; warm-cache forecasts.</li>
+          <li>Perf: cache-first path cut third-party calls ~70–90%; repeat queries near-instant; Render + PostgreSQL + L7 LB.</li>
+          <li>Client: Flutter UI with Syncfusion charts; theme sync; async safety patterns (mounted/teardown-safe).</li>
+          <li>Security & compliance: bcrypt + AES-256; OAuth2/JWT; SMTP OTC verification; WAF + ELK; parameterized SQLAlchemy ORM.</li>
+          <li>Process/docs: Jira ceremonies; GitHub PRs; SRS/Design/Test Plan/RTM; ERD/DFD/UML in Whimsical/Lucidchart.</li>
+        </ul>
+        <!-- Compact thumbnail strip -->
+        <div class="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-7 gap-2 mt-4">
+          <img src="images/m.1.jpg" alt="MAGMA 1" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="0">
+          <img src="images/m.2.jpg" alt="MAGMA 2" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="1">
+          <img src="images/m.3.jpg" alt="MAGMA 3" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="2">
+          <img src="images/m.4.jpg" alt="MAGMA 4" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="3">
+          <img src="images/m.5.jpg" alt="MAGMA 5" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="4">
+          <img src="images/m.6.jpg" alt="MAGMA 6" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer" loading="lazy" data-gallery="magma" data-index="5">
+          <img src="images/m.7.jpg" alt="MAGMA 7" class="rounded-lg shadow-soft h-28 w-full object-cover cursor-pointer col-span-1 sm:col-span-2 md:col-span-1" loading="lazy" data-gallery="magma" data-index="6">
         </div>
       </article>
     </section>
 
+    <!-- Course Project -->
+    <article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
+      <div class="header-row">
+        <div>
+          <h3 class="text-xl font-semibold">Algorithmic Scheduling & Optimization Tool</h3>
+          <span class="text-sm text-zinc-500">January 2024</span>
+        </div>
+      </div>
+      <ul class="ul-tight one-col list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+        <li>Built a <b>C++ console application</b> that performs <b>dataset ingestion</b> to generate optimized schedules and resource allocations, supporting <b>query parameter-style filters</b> for task selection and <b>time window constraints</b>.</li>
+        <li>Implemented <b>shortest path calculation</b> using <b>graph data structures</b> such as <b>linked lists</b> and <b>adjacency arrays</b>. Analyzed runtime as <b>O(V+E)</b> for <b>Breadth-First Search (BFS)</b> and <b>Depth-First Search (DFS)</b>, with <b>Dijkstra’s algorithm</b> at <b>O(E log V)</b>.</li>
+        <li>Incorporated <b>dynamic programming</b> for minimizing execution cost under resource constraints, similar to <b>knapsack optimization</b>, reducing brute-force <b>O(2^n)</b> search to <b>O(n·W)</b> time.</li>
+        <li>Applied <b>greedy heuristics</b> for approximate scheduling with near-linear <b>O(n log n)</b> complexity. Utilized <b>regular expression-based input parsing</b> to validate and preprocess datasets efficiently.</li>
+        <li>Demonstrated <b>binary tree operations</b> including <b>inverting binary trees</b> in <b>O(n)</b> time for hierarchical task structuring and traversal experiments. Modeled task uniqueness using <b>composite key fields</b> for task ID, resource, and time to enforce scheduling integrity.</li>
+        <li>Added a <b>benchmarking mode</b> to compare <b>algorithm performance</b> and <b>complexity</b> across small vs large inputs, reporting both <b>empirical results</b> and theoretical <b>Big-O tradeoffs</b>.</li>
+        <li>Designed <b>modular functions</b> with structured <b>error handling</b>, enabling extendibility for additional algorithms and dataset formats.</li>
+      </ul>
+    </article>
 
-
-<!-- Course Project -->
-<article class="mt-4 grid gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
-  <div class="header-row">
-    <div>
-      <h3 class="text-xl font-semibold">Algorithmic Scheduling & Optimization Tool</h3>
-      <span class="text-sm text-zinc-500">January 2024</span>
-    </div>
-  </div>
-<ul class="ul-tight one-col list-disc pl-5 space-y-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-  <li>Built a <b>C++ console application</b> that performs <b>dataset ingestion</b> to generate optimized schedules and resource allocations, supporting <b>query parameter-style filters</b> for task selection and <b>time window constraints</b>.</li>
-  
-  <li>Implemented <b>shortest path calculation</b> using <b>graph data structures</b> such as <b>linked lists</b> and <b>adjacency arrays</b>. Analyzed runtime as <b>O(V+E)</b> for <b>Breadth-First Search (BFS)</b> and <b>Depth-First Search (DFS)</b>, with <b>Dijkstra’s algorithm</b> at <b>O(E log V)</b>.</li>
-  
-  <li>Incorporated <b>dynamic programming</b> for minimizing execution cost under resource constraints, similar to <b>knapsack optimization</b>, reducing brute-force <b>O(2^n)</b> search to <b>O(n·W)</b> time.</li>
-  
-  <li>Applied <b>greedy heuristics</b> for approximate scheduling with near-linear <b>O(n log n)</b> complexity. Utilized <b>regular expression-based input parsing</b> to validate and preprocess datasets efficiently.</li>
-  
-  <li>Demonstrated <b>binary tree operations</b> including <b>inverting binary trees</b> in <b>O(n)</b> time for hierarchical task structuring and traversal experiments. Modeled task uniqueness using <b>composite key fields</b> for task ID, resource, and time to enforce scheduling integrity.</li>
-  
-  <li>Added a <b>benchmarking mode</b> to compare <b>algorithm performance</b> and <b>complexity</b> across small vs large inputs, reporting both <b>empirical results</b> and theoretical <b>Big-O tradeoffs</b>.</li>
-  
-  <li>Designed <b>modular functions</b> with structured <b>error handling</b>, enabling extendibility for additional algorithms and dataset formats.</li>
-</ul>
-</article>
-
-
-
-<!-- Certifications -->
+    <!-- Certifications -->
     <section id="certs" class="py-8">
       <h2 class="text-2xl font-bold">Certifications</h2>
       <ul class="font-bold mt-3 list-disc pl-5 space-y-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         <li>Google Cybersecurity Certificate </li>
         <li>CITI Health Information Privacy & Security (HIPS)</li>
-        <li>Internet‑Based Research (BIOMED & SBE)</li>
+        <li>Internet-Based Research (BIOMED & SBE)</li>
         <li>Social & Behavioral Researchers</li>
         <li>Social & Behavioral Responsible Conduct of Research</li>
         <li>Vulnerable Populations – Children (BIOMED) </li>
       </ul>
     </section>
 
-
-
-<!-- Education -->
+    <!-- Education -->
     <section id="education" class="py-8">
       <h2 class="text-2xl font-bold">Education</h2>
       <div class="mt-4 grid gap-4">
@@ -489,212 +484,190 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
           <p class="text-sm text-zinc-600 dark:text-zinc-400">Detroit, MI • GPA 3.32 • May 2025</p>
         </div>
         <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60 shadow-soft">
-          <h3 class="font-semibold">Plymouth‑Canton Educational Park — High School Diploma</h3>
+          <h3 class="font-semibold">Plymouth-Canton Educational Park — High School Diploma</h3>
           <p class="text-sm text-zinc-600 dark:text-zinc-400">Canton, MI • GPA 3.7 (Dean’s List) • June 2021</p>
         </div>
       </div>
     </section>
-<!-- Coursework -->
-<section id="coursework" class="py-8">
-  <h2 class="text-2xl font-bold">Relevant Coursework</h2>
-  <!-- Masonry columns: 1 col on mobile, 2 cols on md+ -->
-  <div class="mt-4 columns-1 md:columns-2 gap-4">
-    <!-- Core Computer Science -->
-    <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer">Core Computer Science</summary>
-      <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
-        <li>BE 1600 — Intro to Programming & Computation</li>
-        <li>CSC 1100 — Problem Solving & Programming <span class="text-xs opacity-80">(Python)</span></li>
-        <li>CSC 2110 — Computer Science I</li>
-        <li>CSC 2200 — Computer Science II <span class="text-xs opacity-80">(Java/C++)</span></li>
-        <li>CSC 1500 — Fundamental Structures</li>
-        <li>CSC 3020 — Java Programming</li>
-        <li>CSC 3100 — Computer Architecture & Organization</li>
-        <li>CSC 3110 — Algorithm Design & Analysis</li>
-        <li>CSC 4420/21 — Operating Systems</li>
-        <li>CSC 4710 — Database Management Systems</li>
-        <li>CSC 4110 — Software Engineering</li>
-        <li>CSC 5750 — Web Technology</li>
-        <li>CSC 4500 — Intro to Theoretical Computer Science</li>
-      </ul>
-    </details>
-    <!-- Cybersecurity & Systems -->
-    <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer">Cybersecurity & Systems</summary>
-      <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
-        <li>CSC 5272 — Principles of Cyber Security</li>
-        <li>CSC 5290 — Cyber Security Practice</li>
-        <li>CSC 4320 — Systems Administration</li>
-        <li>CSC 3010 — Ethics in Computer Science</li>
-      </ul>
-    </details>
-    <!-- Mathematics -->
-    <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer">Mathematics</summary>
-      <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
-        <li>MAT 2010 — Calculus I</li>
-        <li>MAT 2020 — Calculus II</li>
-        <li>MAT 2030 — Calculus III</li>
-        <li>MAT 2250 — Elementary Linear Algebra</li>
-        <li>BE 2100 — Probability & Statistics for Engineers</li>
-      </ul>
-    </details>
-    <!-- Engineering -->
-    <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
-      <summary class="font-semibold cursor-pointer">Engineering</summary>
-      <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
-        <li>BE 1200 — CAD/3D Printing & Design</li>
-        <li>ENG 3050 — Technical Communication <span class="text-xs opacity-80">(Reports)</span></li>
-        <li>ENG 3060 — Technical Communication <span class="text-xs opacity-80">(Presentations)</span></li>
-        <li>CSC 4996 — Senior Capstone Project</li>
-        <li>PHY 2175 — University Physics for Engineers I
-          <span class="text-xs opacity-80">
-            (statics, kinematics, dynamics, energy & momentum, rotation, SHM, optics, fluids, thermos)
-          </span>
-        </li>
-        <li>PHY 2185/81 — University Physics for Engineers II
-          <span class="text-xs opacity-80">
-            (electrostatics, circuits, magnetic fields/induction, DC/AC circuits, EM waves, Maxwell’s ideas, interference experiments)
-          </span>
-        </li>
-      </ul>
-    </details>
+
+    <!-- Coursework -->
+    <section id="coursework" class="py-8">
+      <h2 class="text-2xl font-bold">Relevant Coursework</h2>
+      <!-- Masonry columns: 1 col on mobile, 2 cols on md+ -->
+      <div class="mt-4 columns-1 md:columns-2 gap-4">
+        <!-- Core Computer Science -->
+        <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer">Core Computer Science</summary>
+          <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
+            <li>BE 1600 — Intro to Programming & Computation</li>
+            <li>CSC 1100 — Problem Solving & Programming <span class="text-xs opacity-80">(Python)</span></li>
+            <li>CSC 2110 — Computer Science I</li>
+            <li>CSC 2200 — Computer Science II <span class="text-xs opacity-80">(Java/C++)</span></li>
+            <li>CSC 1500 — Fundamental Structures</li>
+            <li>CSC 3020 — Java Programming</li>
+            <li>CSC 3100 — Computer Architecture & Organization</li>
+            <li>CSC 3110 — Algorithm Design & Analysis</li>
+            <li>CSC 4420/21 — Operating Systems</li>
+            <li>CSC 4710 — Database Management Systems</li>
+            <li>CSC 4110 — Software Engineering</li>
+            <li>CSC 5750 — Web Technology</li>
+            <li>CSC 4500 — Intro to Theoretical Computer Science</li>
+          </ul>
+        </details>
+        <!-- Cybersecurity & Systems -->
+        <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer">Cybersecurity & Systems</summary>
+          <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
+            <li>CSC 5272 — Principles of Cyber Security</li>
+            <li>CSC 5290 — Cyber Security Practice</li>
+            <li>CSC 4320 — Systems Administration</li>
+            <li>CSC 3010 — Ethics in Computer Science</li>
+          </ul>
+        </details>
+        <!-- Mathematics -->
+        <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer">Mathematics</summary>
+          <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
+            <li>MAT 2010 — Calculus I</li>
+            <li>MAT 2020 — Calculus II</li>
+            <li>MAT 2030 — Calculus III</li>
+            <li>MAT 2250 — Elementary Linear Algebra</li>
+            <li>BE 2100 — Probability & Statistics for Engineers</li>
+          </ul>
+        </details>
+        <!-- Engineering -->
+        <details class="break-inside-avoid mb-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 bg-white/60 dark:bg-zinc-900/60">
+          <summary class="font-semibold cursor-pointer">Engineering</summary>
+          <ul class="mt-2 list-disc pl-5 space-y-1 text-sm leading-relaxed">
+            <li>BE 1200 — CAD/3D Printing & Design</li>
+            <li>ENG 3050 — Technical Communication <span class="text-xs opacity-80">(Reports)</span></li>
+            <li>ENG 3060 — Technical Communication <span class="text-xs opacity-80">(Presentations)</span></li>
+            <li>CSC 4996 — Senior Capstone Project</li>
+            <li>PHY 2175 — University Physics for Engineers I
+              <span class="text-xs opacity-80">
+                (statics, kinematics, dynamics, energy & momentum, rotation, SHM, optics, fluids, thermos)
+              </span>
+            </li>
+            <li>PHY 2185/81 — University Physics for Engineers II
+              <span class="text-xs opacity-80">
+                (electrostatics, circuits, magnetic fields/induction, DC/AC circuits, EM waves, Maxwell’s ideas, interference experiments)
+              </span>
+            </li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 hidden bg-black/80 z-50 flex items-center justify-center">
+    <button id="lightboxClose" 
+            class="absolute top-6 right-6 text-white text-4xl font-bold hover:text-red-400" 
+            aria-label="Close">×</button>
+
+    <!-- Prev -->
+    <button id="lightboxPrev" 
+            class="absolute left-4 sm:left-8 text-white text-4xl sm:text-5xl font-bold px-3 py-2 
+                   bg-black/50 rounded-full hover:bg-black/70 transition">
+      ‹
+    </button>
+
+    <!-- Image -->
+    <img id="lightboxImg" 
+         src="" 
+         alt="Screenshot" 
+         class="max-h-[90vh] max-w-[90vw] object-contain rounded-2xl shadow-soft mx-auto" />
+
+    <!-- Next -->
+    <button id="lightboxNext" 
+            class="absolute right-4 sm:right-8 text-white text-4xl sm:text-5xl font-bold px-3 py-2 
+                   bg-black/50 rounded-full hover:bg-black/70 transition">
+      ›
+    </button>
   </div>
-</section>
 
-
-
-
-
-<!-- Lightbox Modal -->
-<div id="lightbox" class="fixed inset-0 hidden bg-black/80 z-50 flex items-center justify-center">
-  <button id="lightboxClose" 
-          class="absolute top-6 right-6 text-white text-4xl font-bold hover:text-red-400" 
-          aria-label="Close">×</button>
-
-  <!-- Prev -->
-  <button id="lightboxPrev" 
-          class="absolute left-8 text-white text-5xl font-bold px-3 py-2 
-                 bg-black/50 rounded-full hover:bg-black/70 transition">
-    ‹
-  </button>
-
-  <!-- Image -->
-  <img id="lightboxImg" 
-       src="" 
-       alt="Screenshot" 
-       class="max-h-[90vh] max-w-[90vw] object-contain rounded-2xl shadow-soft mx-auto" />
-
-  <!-- Next -->
-  <button id="lightboxNext" 
-          class="absolute right-8 text-white text-5xl font-bold px-3 py-2 
-                 bg-black/50 rounded-full hover:bg-black/70 transition">
-    ›
-  </button>
-</div>
-
-<script>
-  // --- Auto year for footer ---
-  document.addEventListener('DOMContentLoaded', () => {
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-  });
-
-  // --- Lightbox with slideshow ---
-  (function () {
-    const lb = document.getElementById('lightbox');
-    const lbImg  = document.getElementById('lightboxImg');
-    const lbClose = document.getElementById('lightboxClose');
-    const lbPrev  = document.getElementById('lightboxPrev');
-    const lbNext  = document.getElementById('lightboxNext');
-    if (!lb || !lbImg) return; // if lightbox isn't on the page, bail safely
-    const thumbs = Array.from(document.querySelectorAll('img[data-gallery="magma"]'));
-    let cur = 0;
-    function show(i) {
-      if (!thumbs.length) return;
-      cur = (i + thumbs.length) % thumbs.length;
-      lbImg.src = thumbs[cur].src;
-      lb.classList.remove('hidden');
-    }
-    thumbs.forEach((img, idx) => img.addEventListener('click', () => show(idx)));
-    lbPrev?.addEventListener('click', (e) => { e.stopPropagation(); show(cur - 1); });
-    lbNext?.addEventListener('click', (e) => { e.stopPropagation(); show(cur + 1); });
-    lbClose?.addEventListener('click', () => lb.classList.add('hidden'));
-    lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.add('hidden'); });
-
-    // --- Keyboard nav ---
-    window.addEventListener('keydown', (e) => {
-      if (lb.classList.contains('hidden')) return;
-      if (e.key === 'ArrowLeft')  show(cur - 1);
-      if (e.key === 'ArrowRight') show(cur + 1);
-      if (e.key === 'Escape')     lb.classList.add('hidden');
+  <script>
+    // --- Auto year for footer ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const yearSpan = document.getElementById('year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
 
-    // --- Swipe support ---
-    let sx = 0, sy = 0, st = 0;
-    const SWIPE_THRESHOLD = 40, VERTICAL_TOLERANCE = 60, TIME_MAX = 600;
-    lb.style.touchAction = 'none';
-    lb.addEventListener('touchstart', (e) => {
-      if (lb.classList.contains('hidden')) return;
-      const t = e.changedTouches[0];
-      sx = t.clientX; sy = t.clientY; st = Date.now();
-    }, { passive: true });
-    lb.addEventListener('touchmove', (e) => {
-      if (lb.classList.contains('hidden')) return;
-      e.preventDefault();
-    }, { passive: false });
-    lb.addEventListener('touchend', (e) => {
-      if (lb.classList.contains('hidden')) return;
-      const t = e.changedTouches[0];
-      const dx = t.clientX - sx, dy = t.clientY - sy, dt = Date.now() - st;
-      const isHorizontal = Math.abs(dy) < VERTICAL_TOLERANCE;
-      const isFastEnough = dt < TIME_MAX;
-      const isLongEnough = Math.abs(dx) > SWIPE_THRESHOLD;
-      if (isHorizontal && isFastEnough && isLongEnough) {
-        if (dx < 0) show(cur + 1); else show(cur - 1);
+    // --- Lightbox with slideshow ---
+    (function () {
+      const lb = document.getElementById('lightbox');
+      const lbImg  = document.getElementById('lightboxImg');
+      const lbClose = document.getElementById('lightboxClose');
+      const lbPrev  = document.getElementById('lightboxPrev');
+      const lbNext  = document.getElementById('lightboxNext');
+      if (!lb || !lbImg) return; // if lightbox isn't on the page, bail safely
+      const thumbs = Array.from(document.querySelectorAll('img[data-gallery="magma"]'));
+      let cur = 0;
+      function show(i) {
+        if (!thumbs.length) return;
+        cur = (i + thumbs.length) % thumbs.length;
+        lbImg.src = thumbs[cur].src;
+        lb.classList.remove('hidden');
       }
+      thumbs.forEach((img, idx) => img.addEventListener('click', () => show(idx)));
+      lbPrev?.addEventListener('click', (e) => { e.stopPropagation(); show(cur - 1); });
+      lbNext?.addEventListener('click', (e) => { e.stopPropagation(); show(cur + 1); });
+      lbClose?.addEventListener('click', () => lb.classList.add('hidden'));
+      lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.add('hidden'); });
+
+      // --- Keyboard nav ---
+      window.addEventListener('keydown', (e) => {
+        if (lb.classList.contains('hidden')) return;
+        if (e.key === 'ArrowLeft')  show(cur - 1);
+        if (e.key === 'ArrowRight') show(cur + 1);
+        if (e.key === 'Escape')     lb.classList.add('hidden');
+      });
+
+      // --- Swipe support ---
+      let sx = 0, sy = 0, st = 0;
+      const SWIPE_THRESHOLD = 40, VERTICAL_TOLERANCE = 60, TIME_MAX = 600;
+      lb.style.touchAction = 'none';
+      lb.addEventListener('touchstart', (e) => {
+        if (lb.classList.contains('hidden')) return;
+        const t = e.changedTouches[0];
+        sx = t.clientX; sy = t.clientY; st = Date.now();
+      }, { passive: true });
+      lb.addEventListener('touchmove', (e) => {
+        if (lb.classList.contains('hidden')) return;
+        e.preventDefault();
+      }, { passive: false });
+      lb.addEventListener('touchend', (e) => {
+        if (lb.classList.contains('hidden')) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - sx, dy = t.clientY - sy, dt = Date.now() - st;
+        const isHorizontal = Math.abs(dy) < VERTICAL_TOLERANCE;
+        const isFastEnough = dt < TIME_MAX;
+        const isLongEnough = Math.abs(dx) > SWIPE_THRESHOLD;
+        if (isHorizontal && isFastEnough && isLongEnough) {
+          if (dx < 0) show(cur + 1); else show(cur - 1);
+        }
+      });
+
+      // Hide broken images 
+      document.querySelectorAll('img[data-hide-on-error]').forEach(img => {
+        img.addEventListener('error', () => img.classList.add('hidden-on-error'));
+      });
+    })();
+  </script>
+
+  <div class="cursor-glow"></div>
+  <script>
+    const glow = document.querySelector('.cursor-glow');
+    document.addEventListener('mousemove', e => {
+      if (!glow) return;
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
     });
+  </script>
 
-    // Hide broken images 
-    document.querySelectorAll('img[data-hide-on-error]').forEach(img => {
-      img.addEventListener('error', () => img.classList.add('hidden-on-error'));
-    });
-  })();
-</script>
-
-<style>
-  body {
-    cursor: none; /* hide default cursor */
-  }
-  .cursor-glow {
-    position: fixed;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(239,68,68,0.8) 0%, transparent 70%);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-  }
-</style>
-
-<div class="cursor-glow"></div>
-
-<script>
-  const glow = document.querySelector('.cursor-glow');
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  });
-</script>
-
-
-
-<!-- Footer -->
-<footer class="mt-12 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800">
-  © <span id="year"></span> Chinmay Deore. All Rights Reserved.
-</footer>
-
-
+  <!-- Footer -->
+  <footer class="mt-12 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800">
+    © <span id="year"></span> Chinmay Deore. All Rights Reserved.
+  </footer>
 </body>
 </html>
