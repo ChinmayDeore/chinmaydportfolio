@@ -17,7 +17,6 @@
     /* Hide images that fail to load */
     img[data-hide-on-error] { visibility: visible; }
     img[data-hide-on-error].hidden-on-error { visibility: hidden; height: 0; }
-    /* Mobile-safe cursor: show glow only on precise pointers */
     @media (pointer:fine) {
       body { cursor: none; }
       .cursor-glow { display: block; position: fixed; width: 24px; height: 24px; border-radius: 9999px; pointer-events:none; box-shadow: 0 0 60px 20px rgba(255,0,0,.15); transform: translate(-50%,-50%); z-index: 50; }
@@ -25,7 +24,6 @@
     @media (pointer:coarse) {
       .cursor-glow { display: none; }
     }
-    /* Optional: hide scrollbars for any overflow containers (not required) */
     .no-scrollbar::-webkit-scrollbar{ display:none; }
     .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
   </style>
@@ -623,7 +621,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
   </div>
 
   <script>
-    // --- Auto year for footer (if a footer year span exists) ---
+    // --- Auto year for footer ---
     document.addEventListener('DOMContentLoaded', () => {
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -709,7 +707,6 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
   </script>
 
 <style>
-  /* Desktop glow: tiny, bright, always on top */
   @media (pointer:fine){
     .cursor-glow{
       position: fixed;
@@ -734,7 +731,6 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
   (function () {
     const glow = document.querySelector('.cursor-glow');
     if (!glow) return;
-    // immediate follow for crisp feel
     window.addEventListener('mousemove', (e) => {
       glow.style.left = e.clientX + 'px';
       glow.style.top  = e.clientY + 'px';
@@ -742,11 +738,7 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
   })();
 </script>
 
-
-
-
-
-  <!-- Footer (kept minimal; content unchanged if not present originally) -->
+<!-- Footer -->
   <footer class="mt-12 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800">
     © <span id="year"></span> Chinmay Deore. All Rights Reserved.
   </footer>
