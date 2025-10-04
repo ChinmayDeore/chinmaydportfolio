@@ -30,6 +30,8 @@
     .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
   </style>
 </head>
+<div class="cursor-glow" aria-hidden="true"></div>
+
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-indigo-200/50 dark:bg-zinc-950 dark:text-zinc-100">
 
 <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-zinc-900/70 border-b border-zinc-200 dark:border-zinc-800">
@@ -707,39 +709,42 @@ Maintained formal deliverables: <b>SRS</b>, <b>Design Specifications</b>, stakeh
   </script>
 
 <style>
-  /* Smooth scrolling */
-  html { scroll-behavior: smooth; }
-
-  /* Lightbox helpers */
-  .fade-enter { opacity: 0; }
-  .fade-enter-active { opacity: 1; transition: opacity 150ms ease-in-out; }
-  .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-
-  /* Hide images that fail to load */
-  img[data-hide-on-error] { visibility: visible; }
-  img[data-hide-on-error].hidden-on-error { visibility: hidden; height: 0; }
-
-  /* Keep the glow on precise pointers, but DO NOT hide the native cursor */
-  @media (pointer:fine) {
-    .cursor-glow {
-      display: block;
+  /* Desktop glow: tiny, bright, always on top */
+  @media (pointer:fine){
+    .cursor-glow{
       position: fixed;
-      width: 24px; height: 24px;
+      left: 0; top: 0;
+      width: 6px; height: 6px;
       border-radius: 9999px;
-      pointer-events: none;
-      box-shadow: 0 0 60px 20px rgba(255,0,0,.15);
+      background: #ff2d2d;
+      box-shadow:
+        0 0 6px rgba(255,45,45,0.95),
+        0 0 14px rgba(255,45,45,0.65);
       transform: translate(-50%,-50%);
-      z-index: 50;
+      pointer-events: none;
+      z-index: 2147483647;
+      mix-blend-mode: normal;
+      opacity: 1;
+      will-change: transform;
     }
   }
-  @media (pointer:coarse) {
-    .cursor-glow { display: none; }
-  }
-
-  /* Optional: hide scrollbars for any overflow containers */
-  .no-scrollbar::-webkit-scrollbar{ display:none; }
-  .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+  @media (pointer:coarse){ .cursor-glow{ display:none; } }
 </style>
+<script>
+  (function () {
+    const glow = document.querySelector('.cursor-glow');
+    if (!glow) return;
+    // immediate follow for crisp feel
+    window.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    }, { passive: true });
+  })();
+</script>
+
+
+
+
 
   <!-- Footer (kept minimal; content unchanged if not present originally) -->
   <footer class="mt-12 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800">
